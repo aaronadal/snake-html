@@ -1,0 +1,164 @@
+/**
+ *  HTML SNAKE GAME
+ *
+ *  Copyright 2019 Aarón Nadal
+ *
+ *  PUBLISHED UNDER MIT LICENSE
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+ *  and associated documentation files (the "Software"), to deal in the Software without restriction,
+ *  including without limitation the rights to use, copy, modify, merge, publish, distribute,
+ *  sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all copies or
+ *  substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+ *  NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ *  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ *  DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+html,
+body {
+    --border-radius: .4em;
+
+    height:  100%;
+    margin:  0;
+    padding: 0;
+}
+
+body {
+    display:         flex;
+    align-items:     center;
+    justify-content: center;
+}
+
+.scenario {
+    background: #393633;
+    position:   relative;
+}
+
+.snake .snake-link,
+.meal {
+    position: absolute;
+
+    height: 1em;
+    width:  1em;
+}
+
+.snake .snake-link {
+    background: #d7dadd;
+}
+
+.snake .snake-link.fat {
+    width:         1.5em;
+    height:        1.5em;
+    border-radius: 100%;
+    transform:     translate(-.25em, -.25em);
+}
+
+.snake.top .snake-link.fat:first-child,
+.snake.left .snake-link.fat:first-child,
+.snake.bottom .snake-link.fat:first-child,
+.snake.right .snake-link.fat:first-child {
+    transition:    transform .25s ease-in-out, height .25s ease-in-out, width .25s ease-in-out, border-radius .25em ease-in-out;
+    border-radius: var(--border-radius);
+}
+
+.snake .snake-link:first-child {
+    transition: none;
+}
+
+.snake.top .snake-link:first-child {
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.snake.left .snake-link:first-child {
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+.snake.bottom .snake-link:first-child {
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+.snake.right .snake-link:first-child {
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+.snake .snake-link.top[data-next-dir="left"] {
+    border-top-right-radius: var(--border-radius);
+}
+
+.snake .snake-link.top[data-next-dir="right"] {
+    border-top-left-radius: var(--border-radius);
+}
+
+.snake .snake-link.bottom[data-next-dir="left"] {
+    border-bottom-right-radius: var(--border-radius);
+}
+
+.snake .snake-link.bottom[data-next-dir="right"] {
+    border-bottom-left-radius: var(--border-radius);
+}
+
+.snake .snake-link.left[data-next-dir="top"] {
+    border-bottom-left-radius: var(--border-radius);
+}
+
+.snake .snake-link.left[data-next-dir="bottom"] {
+    border-top-left-radius: var(--border-radius);
+}
+
+.snake .snake-link.right[data-next-dir="top"] {
+    border-bottom-right-radius: var(--border-radius);
+}
+
+.snake .snake-link.right[data-next-dir="bottom"] {
+    border-top-right-radius: var(--border-radius);
+}
+
+.meal {
+    background: #ffffff;
+}
+
+.meal.apple {
+    background:                #ff0800;
+    border-bottom-left-radius:  .35em 1em;
+    border-bottom-right-radius: .35em 1em;
+    border-top-left-radius:     .25em;
+    border-top-right-radius:    .25em;
+}
+
+.meal.apple::before {
+    content:                   '';
+    background:                #5Aaf36;
+    border-bottom-left-radius: 1em;
+    border-top-right-radius:   1em;
+
+    position: absolute;
+    width:    .4em;
+    height:   .55em;
+    top:      -.4em;
+    left:     .25em;
+}
+
+.meal.strawberry {
+    background:                #C64E59;
+    border-bottom-left-radius:  .75em 1em;
+    border-bottom-right-radius: .75em 1em;
+    border-top-left-radius:     .4em;
+    border-top-right-radius:    .4em;
+}
+
+.meal.orange {
+    background:    #FFA500;
+    border-radius: 100%;
+}
+
+.meal.plum {
+    background:    #DDA0DD;
+    border-radius: 100%;
+}
